@@ -1,0 +1,49 @@
+{% schema %}
+    {
+        "name": "Header",
+        "tag": "header"
+    }
+{% endschema %}
+
+<div class="py-2 px-4 grid grid-cols-2 md:grid-cols-3 align-middle bg-fuchsia-200 shadow-sm">
+
+    {% comment %} Logo {% endcomment %}
+    <div>
+    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+    </div>
+
+    {% comment %} Title {% endcomment %}
+    <div class="hidden md:block my-auto text-center text-lg">
+    {{ page_title }}
+    </div>
+
+    {% comment %} Navigation {% endcomment %}
+    <nav class="flex items-center justify-end gap-3 text-sm uppercase font-semibold">
+  {% comment %} Menu Links {% endcomment %}
+  {% for link in linklists.main-menu.links %}
+    {% if link.active %}
+      <a class="text-fuchsia-400" href="{{ link.url }}">{{ link.title }}</a>
+      {% else %}
+      <a class="hover:text-fuchsia-600" href="{{ link.url }}">{{ link.title }}</a>
+      {% endif %}
+  {% endfor %}
+
+  {% if shop.customer_accounts_enabled %}
+    {% if customer %}
+      <a href="/account">account</a>
+      {{ 'log out'  | customer_logout_link }}
+    {% else %}
+      {{ 'log in ' | customer_login_link }}
+      {{ 'register' | customer_register_link }}
+    {% endif %}
+  {% endif %}
+
+  {% comment %} Cart Link {% endcomment %}
+<a href="/cart">
+  <div class="p-2 bg-fuchsia-50 hover:text-fuchsia-600 hover:bg-fuchsia-300 rounded-full">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+  </div>
+</a>
+  </nav>
+
+</div>
